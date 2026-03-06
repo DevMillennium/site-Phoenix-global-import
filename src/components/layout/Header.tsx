@@ -19,11 +19,11 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-[100] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6 relative z-10">
         <Link
           href="/"
-          className="flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary rounded"
+          className="flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary rounded min-w-0"
           aria-label="Phoenix Global - Início"
         >
           <Image
@@ -31,18 +31,18 @@ export function Header() {
             alt="Phoenix Global - Import and Export"
             width={160}
             height={48}
-            className="h-10 w-auto object-contain md:h-12"
+            className="h-10 w-auto object-contain md:h-12 pointer-events-none"
             priority
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1" aria-label="Navegação principal">
+        <nav className="hidden md:flex items-center gap-1 shrink-0" aria-label="Navegação principal">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                "px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
                 pathname === item.href
                   ? "text-phoenix-primary bg-phoenix-primary/10"
                   : "text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card"
@@ -53,10 +53,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/carrinho"
-            className="flex items-center justify-center h-10 w-10 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary"
+            className="flex items-center justify-center h-10 w-10 min-h-[2.5rem] min-w-[2.5rem] rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary"
             aria-label="Ver carrinho"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

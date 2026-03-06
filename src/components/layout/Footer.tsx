@@ -9,6 +9,7 @@ const footerLinks = {
     { href: "/produtos?categoria=gaming", label: "Gaming" },
     { href: "/produtos?categoria=wearables", label: "Wearables" },
     { href: "/produtos?categoria=acessorios", label: "Acessórios" },
+    { href: "/produtos?categoria=conectividade", label: "Conectividade" },
     { href: "/produtos?categoria=cosmeticos", label: "Cosméticos" },
   ],
   Empresa: [
