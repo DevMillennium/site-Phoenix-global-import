@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --phoenix-dark: #0d0d0d;
+  --phoenix-surface: #1a1a1a;
+  --phoenix-card: #242424;
+  --phoenix-primary: #e85d04;
+  --phoenix-primary-hover: #f4a261;
+  --phoenix-accent: #dc2f02;
+  --phoenix-gold: #e9c46a;
+  --phoenix-text: #f8f8f8;
+  --phoenix-text-muted: #a0a0a0;
+  --phoenix-success: #2d6a4f;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--phoenix-dark);
+  color: var(--phoenix-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Foco visível para acessibilidade */
+:focus-visible {
+  outline: 2px solid var(--phoenix-primary);
+  outline-offset: 2px;
+}
+
+/* Scrollbar discreta */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--phoenix-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--phoenix-card);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--phoenix-muted);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
