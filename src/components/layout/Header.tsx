@@ -19,11 +19,11 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-[100] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6 relative z-10">
+    <header className="sticky top-0 z-[9999] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6 relative z-[1] pointer-events-auto">
         <Link
           href="/"
-          className="flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary rounded min-w-0"
+          className="relative z-[2] flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary rounded min-w-0 cursor-pointer pointer-events-auto"
           aria-label="Phoenix Global - Início"
         >
           <Image
@@ -31,18 +31,18 @@ export function Header() {
             alt="Phoenix Global - Import and Export"
             width={160}
             height={48}
-            className="h-10 w-auto object-contain md:h-12 pointer-events-none"
+            className="h-10 w-auto object-contain md:h-12 pointer-events-none select-none"
             priority
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1 shrink-0" aria-label="Navegação principal">
+        <nav className="relative z-[2] hidden md:flex items-center gap-1 shrink-0 pointer-events-auto" aria-label="Navegação principal">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap",
+                "relative z-[2] px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap cursor-pointer pointer-events-auto",
                 pathname === item.href
                   ? "text-phoenix-primary bg-phoenix-primary/10"
                   : "text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card"
@@ -53,10 +53,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="relative z-[2] flex items-center gap-3 shrink-0 pointer-events-auto">
           <Link
             href="/carrinho"
-            className="flex items-center justify-center h-10 w-10 min-h-[2.5rem] min-w-[2.5rem] rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary"
+            className="relative z-[2] flex items-center justify-center h-10 w-10 min-h-[2.5rem] min-w-[2.5rem] rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
             aria-label="Ver carrinho"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +66,7 @@ export function Header() {
 
           <button
             type="button"
-            className="md:hidden flex items-center justify-center h-10 w-10 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary"
+            className="relative z-[2] md:hidden flex items-center justify-center h-10 w-10 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
             onClick={() => setMobileOpen((o) => !o)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"

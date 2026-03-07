@@ -5,6 +5,7 @@ import { getProductBySlug, getAllProducts } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { BotaoPagarCartao } from "@/components/checkout/BotaoPagarCartao";
 import { getWhatsAppNumber, absoluteUrl } from "@/lib/env";
 
 export async function generateStaticParams() {
@@ -122,6 +123,12 @@ export default async function ProdutoPage({
               </svg>
               Comprar no WhatsApp
             </a>
+            <BotaoPagarCartao
+              slug={product.slug}
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-phoenix-primary px-6 py-3 font-medium text-phoenix-primary hover:bg-phoenix-primary/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary disabled:opacity-50"
+            >
+              Pagar com cartão
+            </BotaoPagarCartao>
             <Button href="/contato#cotacao" variant="outline" size="lg">
               Solicitar cotação
             </Button>
