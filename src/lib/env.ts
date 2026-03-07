@@ -4,7 +4,7 @@
  */
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://phoenixglobalimport.com.br";
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5585999999999";
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5585994482323";
 
 export function getBaseUrl(): string {
   return BASE_URL.replace(/\/$/, "");

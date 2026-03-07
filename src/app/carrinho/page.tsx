@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/Button";
+import { getWhatsAppNumber } from "@/lib/env";
 
 export const metadata = {
   title: "Carrinho",
   description: "Revise seus itens e finalize pelo WhatsApp.",
 };
+
+const whatsappNumber = getWhatsAppNumber();
+const whatsappMessage = encodeURIComponent(
+  "Olá! Gostaria de finalizar meu pedido. Segue minha lista de produtos da Phoenix Global Import."
+);
 
 export default function CarrinhoPage() {
   return (
@@ -21,9 +27,14 @@ export default function CarrinhoPage() {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <Button href="/produtos">Ver produtos</Button>
-          <Button href="/contato" variant="outline">
+          <a
+            href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-lg font-medium border border-phoenix-primary text-phoenix-primary hover:bg-phoenix-primary/10 transition-colors px-5 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-phoenix-primary"
+          >
             Falar no WhatsApp
-          </Button>
+          </a>
         </div>
       </div>
 
