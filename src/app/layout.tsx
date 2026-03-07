@@ -16,6 +16,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0d0d0d",
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Phoenix Global Import | Eletrônicos e Tecnologia — Fortaleza",
@@ -33,6 +39,9 @@ export const metadata: Metadata = {
     "Phoenix Global Import",
   ],
   authors: [{ name: "Phoenix Global Import" }],
+  icons: {
+    icon: "/logo-phoenix-global.png",
+  },
   openGraph: {
     type: "website",
     locale: "pt_BR",

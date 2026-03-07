@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { getWhatsAppNumber } from "@/lib/env";
 
 export const metadata = {
   title: "Contato",
@@ -6,7 +7,7 @@ export const metadata = {
     "Entre em contato com a Phoenix Global Import. WhatsApp, cotação e localização em Fortaleza.",
 };
 
-const whatsappNumber = "5585999999999";
+const whatsappNumber = getWhatsAppNumber();
 const whatsappMessage = encodeURIComponent(
   "Olá! Gostaria de mais informações sobre os produtos da Phoenix Global Import."
 );

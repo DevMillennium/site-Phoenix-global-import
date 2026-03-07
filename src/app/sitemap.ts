@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 import { getAllProducts } from "@/data/products";
+import { getBaseUrl } from "@/lib/env";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://phoenixglobalimport.com.br";
+const BASE_URL = getBaseUrl();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const products = getAllProducts();

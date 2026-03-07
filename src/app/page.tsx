@@ -11,13 +11,24 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-phoenix-border">
-        <div className="absolute inset-0 bg-gradient-to-b from-phoenix-primary/10 via-transparent to-transparent" aria-hidden />
-        <div className="container relative mx-auto px-4 py-20 md:py-28 md:px-6">
+      {/* Vídeo de abertura */}
+      <section className="relative min-h-[70vh] w-full overflow-hidden border-b border-phoenix-border bg-phoenix-dark">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover object-center translate-x-[10cm]"
+          aria-label="Vídeo de abertura Phoenix Global Import"
+        >
+          <source src="/hero-abertura.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-phoenix-dark/90 via-phoenix-dark/40 to-transparent" aria-hidden />
+        <div className="container relative z-10 flex min-h-[70vh] flex-col justify-end pb-12 pt-8 md:pb-16 md:pt-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-2xl"
           >
             <h1 className="font-display text-4xl font-bold tracking-tight text-phoenix-text md:text-5xl lg:text-6xl">

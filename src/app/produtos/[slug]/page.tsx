@@ -5,6 +5,7 @@ import { getProductBySlug, getAllProducts } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { getWhatsAppNumber, absoluteUrl } from "@/lib/env";
 
 export async function generateStaticParams() {
   const products = getAllProducts();
@@ -19,13 +20,14 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Produto não encontrado" };
+  const imageUrl = product.images[0] ? absoluteUrl(product.images[0]) : undefined;
   return {
     title: product.name,
     description: product.shortDescription,
     openGraph: {
       title: product.name,
       description: product.shortDescription,
-      images: product.images,
+      images: imageUrl ? [imageUrl] : [],
     },
   };
 }
@@ -39,7 +41,7 @@ export default async function ProdutoPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const whatsappNumber = "5585999999999";
+  const whatsappNumber = getWhatsAppNumber();
   const message = encodeURIComponent(
     `Olá! Gostaria de comprar: ${product.name} - ${formatPrice(product.price)}.`
   );
@@ -142,7 +144,7 @@ export default async function ProdutoPage({
             "@type": "Product",
             name: product.name,
             description: product.description,
-            image: product.images[0],
+            image: product.images[0] ? absoluteUrl(product.images[0]) : undefined,
             offers: {
               "@type": "Offer",
               price: product.pricePix ?? product.price,

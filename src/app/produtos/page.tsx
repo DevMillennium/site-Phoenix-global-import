@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { ProdutosConteudo } from "./ProdutosConteudo";
 import { categories } from "@/data/products";
 
@@ -23,21 +24,21 @@ export default function ProdutosPage() {
       <nav aria-label="Categorias" className="mb-10">
         <ul className="flex flex-wrap gap-2">
           <li>
-            <a
+            <Link
               href="/produtos"
               className="rounded-lg bg-phoenix-primary/20 px-4 py-2 text-sm font-medium text-phoenix-primary"
             >
               Todos
-            </a>
+            </Link>
           </li>
           {categories.map((cat) => (
             <li key={cat.slug}>
-              <a
+              <Link
                 href={`/produtos?categoria=${cat.slug}`}
                 className="rounded-lg px-4 py-2 text-sm font-medium text-phoenix-text-muted hover:bg-phoenix-card hover:text-phoenix-text transition-colors"
               >
                 {cat.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

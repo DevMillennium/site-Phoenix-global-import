@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getWhatsAppNumber } from "@/lib/env";
 
 const footerLinks = {
   Loja: [
@@ -19,7 +20,7 @@ const footerLinks = {
   ],
 };
 
-const whatsappNumber = "5585999999999"; // substituir pelo número real
+const whatsappNumber = getWhatsAppNumber();
 const whatsappMessage = encodeURIComponent(
   "Olá! Gostaria de mais informações sobre os produtos da Phoenix Global Import."
 );
