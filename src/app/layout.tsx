@@ -22,7 +22,10 @@ export const viewport = {
   themeColor: "#0d0d0d",
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://phoenixglobal.com.br";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Phoenix Global Import | Eletrônicos e Tecnologia — Fortaleza",
     template: "%s | Phoenix Global Import",

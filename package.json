@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "start:open": "npm run start & node scripts/abrir-navegador.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel:env": "node scripts/enviar-env-vercel.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.9.0",

@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getProductBySlug } from "@/data/products";
 import { getBaseUrl } from "@/lib/env";
-import { stripe } from "@/lib/stripe-server";
+import { getStripe } from "@/lib/stripe-server";
 
 /** Cria uma sessão do Stripe Checkout e retorna a URL para redirecionar. */
 export async function POST(request: NextRequest) {
+  const stripe = getStripe();
+  if (!stripe) {
+    return NextResponse.json(
+      { error: "Pagamento temporariamente indisponível. Configure STRIPE_SECRET_KEY." },
+      { status: 503 }
+    );
+  }
   try {
     const body = await request.json();
     const { slug, quantity = 1 } = body as { slug?: string; quantity?: number };

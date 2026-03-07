@@ -3,7 +3,7 @@
  * Em produção, defina NEXT_PUBLIC_SITE_URL e NEXT_PUBLIC_WHATSAPP_NUMBER.
  */
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://phoenixglobalimport.com.br";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://phoenixglobal.com.br";
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5585994482323";
 
 export function getBaseUrl(): string {
