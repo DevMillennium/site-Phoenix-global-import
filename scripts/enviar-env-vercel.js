@@ -34,12 +34,6 @@ function parseEnvLocal(content) {
 }
 
 async function main() {
-  const token = process.env.VERCEL_TOKEN;
-  if (!token) {
-    console.error("Defina VERCEL_TOKEN. Crie em: https://vercel.com/account/tokens");
-    process.exit(1);
-  }
-
   let projectIdOrName = process.env.VERCEL_PROJECT;
   let teamId = process.env.VERCEL_TEAM_ID;
   const vercelProjectPath = path.join(projectRoot, ".vercel", "project.json");
@@ -60,6 +54,11 @@ async function main() {
 
   const envContent = fs.readFileSync(envPath, "utf8");
   const vars = parseEnvLocal(envContent);
+  const token = process.env.VERCEL_TOKEN || vars.VERCEL_TOKEN;
+  if (!token) {
+    console.error("Defina VERCEL_TOKEN (variável de ambiente ou em .env.local). Crie em: https://vercel.com/account/tokens");
+    process.exit(1);
+  }
 
   const keysToSend = [
     "STRIPE_SECRET_KEY",
