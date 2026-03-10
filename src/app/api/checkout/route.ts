@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 import { getProductBySlug } from "@/data/products";
 import { getBaseUrl } from "@/lib/env";
-import { getStripe } from "@/lib/stripe-server";
 
 /** Cria uma sessão do Stripe Checkout e retorna a URL para redirecionar. */
 export async function POST(request: NextRequest) {
-  const stripe = getStripe();
-  if (!stripe) {
+  const secret = process.env.STRIPE_SECRET_KEY;
+  if (!secret || typeof secret !== "string" || secret.length < 20) {
     return NextResponse.json(
-      { error: "Pagamento temporariamente indisponível. Configure STRIPE_SECRET_KEY." },
+      { error: "Pagamento temporariamente indisponível. Configure STRIPE_SECRET_KEY na Vercel (Production)." },
       { status: 503 }
     );
   }
+  const stripe = new Stripe(secret, { typescript: true });
   try {
     const body = await request.json();
     const { slug, quantity = 1 } = body as { slug?: string; quantity?: number };
