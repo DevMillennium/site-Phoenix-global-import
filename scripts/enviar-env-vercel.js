@@ -41,12 +41,12 @@ async function main() {
   }
 
   let projectIdOrName = process.env.VERCEL_PROJECT;
-  if (!projectIdOrName) {
-    const vercelProjectPath = path.join(projectRoot, ".vercel", "project.json");
-    if (fs.existsSync(vercelProjectPath)) {
-      const projectJson = JSON.parse(fs.readFileSync(vercelProjectPath, "utf8"));
-      projectIdOrName = projectJson.projectId;
-    }
+  let teamId = process.env.VERCEL_TEAM_ID;
+  const vercelProjectPath = path.join(projectRoot, ".vercel", "project.json");
+  if (fs.existsSync(vercelProjectPath)) {
+    const projectJson = JSON.parse(fs.readFileSync(vercelProjectPath, "utf8"));
+    if (!projectIdOrName) projectIdOrName = projectJson.projectId ?? projectJson.projectName;
+    if (!teamId && projectJson.orgId) teamId = projectJson.orgId;
   }
   if (!projectIdOrName) {
     console.error("Defina VERCEL_PROJECT (nome do projeto na Vercel) ou rode 'vercel link' no projeto.");
@@ -80,8 +80,10 @@ async function main() {
     target: ["production", "preview"],
   }));
 
-  const res = await fetch(
-    `https://api.vercel.com/v10/projects/${encodeURIComponent(projectIdOrName)}/env?upsert=true`,
+  const url = new URL(`https://api.vercel.com/v10/projects/${encodeURIComponent(projectIdOrName)}/env`);
+  url.searchParams.set("upsert", "true");
+  if (teamId) url.searchParams.set("teamId", teamId);
+  const res = await fetch(url.toString(),
     {
       method: "POST",
       headers: {
