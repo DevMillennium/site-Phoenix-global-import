@@ -1,24 +1,42 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { getAllProducts } from "@/data/products";
-import { getBaseUrl } from "@/lib/env";
 
-const BASE_URL = getBaseUrl();
+/** URL base do site. Calculada em runtime para evitar 500 por env em edge. */
+function getBaseUrl(): string {
+  const url = process.env.NEXT_PUBLIC_SITE_URL ?? "https://phoenixglobal.com.br";
+  return url.replace(/\/$/, "");
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const products = getAllProducts();
-  const productUrls = products.map((p) => ({
-    url: `${BASE_URL}/produtos/${p.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
+  try {
+    const baseUrl = getBaseUrl();
+    const products = getAllProducts();
 
-  return [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
-    { url: `${BASE_URL}/produtos`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE_URL}/contato`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/sobre`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/carrinho`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    ...productUrls,
-  ];
+    const productUrls: MetadataRoute.Sitemap = products.map((p) => ({
+      url: `${baseUrl}/produtos/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    }));
+
+    const staticPages: MetadataRoute.Sitemap = [
+      { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
+      { url: `${baseUrl}/produtos`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+      { url: `${baseUrl}/contato`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/sobre`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/carrinho`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    ];
+
+    return [...staticPages, ...productUrls];
+  } catch (err) {
+    console.error("[sitemap] Erro ao gerar sitemap:", err);
+    const baseUrl = getBaseUrl();
+    return [
+      { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
+      { url: `${baseUrl}/produtos`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+      { url: `${baseUrl}/contato`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/sobre`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/carrinho`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
+    ];
+  }
 }

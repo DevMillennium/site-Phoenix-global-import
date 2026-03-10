@@ -13,17 +13,20 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
+  const productUrl = `/produtos/${product.slug}`;
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.05 }}
-      className="group"
+      className="group relative"
     >
       <Link
-        href={`/produtos/${product.slug}`}
-        className="block rounded-xl bg-phoenix-card border border-phoenix-border overflow-hidden hover:border-phoenix-primary/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary"
+        href={productUrl}
+        className="block relative z-10 rounded-xl bg-phoenix-card border border-phoenix-border overflow-hidden hover:border-phoenix-primary/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary touch-manipulation cursor-pointer"
         aria-label={`Ver ${product.name}`}
+        prefetch={true}
       >
         <div className="relative aspect-square bg-phoenix-surface">
           <Image

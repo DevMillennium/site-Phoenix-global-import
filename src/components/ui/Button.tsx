@@ -22,9 +22,9 @@ const variants = {
 };
 
 const sizes = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-5 py-2.5 text-sm",
-  lg: "px-6 py-3 text-base",
+  sm: "px-3 py-2 min-h-[36px] text-sm",
+  md: "px-5 py-2.5 min-h-touch text-sm",
+  lg: "px-6 py-3 min-h-touch text-base",
 };
 
 export function Button({
@@ -36,7 +36,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-phoenix-primary disabled:pointer-events-none disabled:opacity-50 border";
+    "inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-phoenix-primary disabled:pointer-events-none disabled:opacity-50 border touch-manipulation";
 
   const combined = cn(base, variants[variant], sizes[size], className);
 

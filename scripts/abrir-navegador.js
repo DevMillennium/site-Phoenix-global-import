@@ -44,13 +44,26 @@ async function aguardarServidor() {
 }
 
 function abrirNavegador(url) {
-  const comando = process.platform === "darwin" ? "open" : process.platform === "win32" ? "start" : "xdg-open";
-  execSync(`${comando} "${url}"`, { stdio: "ignore" });
+  try {
+    const comando = process.platform === "darwin" ? "open" : process.platform === "win32" ? "start" : "xdg-open";
+    execSync(`${comando} "${url}"`, { stdio: "ignore" });
+  } catch (err) {
+    console.warn("Não foi possível abrir o navegador. Acesse manualmente:", url);
+  }
 }
 
 (async () => {
-  const porta = await aguardarServidor();
-  if (porta) {
-    abrirNavegador(`http://localhost:${porta}`);
+  try {
+    const porta = await aguardarServidor();
+    if (porta) {
+      const url = `http://localhost:${porta}`;
+      abrirNavegador(url);
+      console.log("Navegador aberto em", url);
+    } else {
+      console.warn("Servidor não respondeu a tempo. Tente acessar http://localhost:3000 manualmente.");
+    }
+  } catch (err) {
+    console.error("Erro ao abrir navegador:", err.message);
+    process.exitCode = 1;
   }
 })();

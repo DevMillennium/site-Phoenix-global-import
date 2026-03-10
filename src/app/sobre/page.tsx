@@ -8,12 +8,12 @@ export const metadata = {
 
 export default function SobrePage() {
   return (
-    <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
+    <div className="container py-6 sm:py-8 md:py-12">
       <div className="mx-auto max-w-2xl">
-        <h1 className="font-display text-3xl font-bold text-phoenix-text">
+        <h1 className="font-display text-2xl font-bold text-phoenix-text sm:text-3xl">
           Sobre a Phoenix Global Import
         </h1>
-        <p className="mt-2 text-phoenix-text-muted">
+        <p className="mt-1 sm:mt-2 text-sm sm:text-base text-phoenix-text-muted">
           Eletrônicos e tecnologia com foco em qualidade e entrega.
         </p>
 

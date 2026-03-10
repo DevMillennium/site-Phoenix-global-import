@@ -7,7 +7,19 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: { DEFAULT: "1rem", sm: "1.5rem", lg: "2rem" },
+      screens: { sm: "640px", md: "768px", lg: "1024px", xl: "1280px", "2xl": "1536px" },
+    },
     extend: {
+      minHeight: {
+        "touch": "44px",
+        "screen-dyn": "100dvh",
+      },
+      screens: {
+        "xs": "375px",
+      },
       colors: {
         phoenix: {
           dark: "#0D0D0D",

@@ -25,15 +25,21 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--phoenix-dark);
   color: var(--phoenix-text);
+  font-size: 16px; /* Evita zoom automático no iOS em inputs */
   min-height: 100vh;
+  min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+
+/* Safe area: use em elementos fixos/sticky (header, footer) via classes */
 
 /* Foco visível para acessibilidade */
 :focus-visible {
@@ -64,4 +70,22 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Emulador mobile — dimensões por variáveis CSS */
+.emulador-frame {
+  width: var(--emw);
+  min-width: var(--emw);
+  height: var(--emh);
+  min-height: var(--emh);
+}
+.emulador-inner {
+  width: var(--ifw);
+  height: var(--ifh);
+}
+.emulador-iframe {
+  width: var(--ifw);
+  height: var(--ifh);
+  max-width: var(--ifw);
+  max-height: var(--ifh);
 }

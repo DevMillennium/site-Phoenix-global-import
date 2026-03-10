@@ -19,8 +19,8 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-[9999] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6 relative z-[1] pointer-events-auto">
+    <header className="sticky top-0 z-[9999] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto pt-[env(safe-area-inset-top)]">
+      <div className="container flex h-14 min-h-touch sm:h-16 items-center justify-between gap-2 relative z-[1] pointer-events-auto">
         <Link
           href="/"
           className="relative z-[2] flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary rounded min-w-0 cursor-pointer pointer-events-auto"
@@ -31,7 +31,7 @@ export function Header() {
             alt="Phoenix Global - Import and Export"
             width={160}
             height={48}
-            className="h-10 w-auto object-contain md:h-12 pointer-events-none select-none"
+            className="h-9 w-auto max-w-[140px] sm:h-10 sm:max-w-[160px] md:h-12 object-contain pointer-events-none select-none"
             priority
           />
         </Link>
@@ -56,7 +56,7 @@ export function Header() {
         <div className="relative z-[2] flex items-center gap-3 shrink-0 pointer-events-auto">
           <Link
             href="/carrinho"
-            className="relative z-[2] flex items-center justify-center h-10 w-10 min-h-[2.5rem] min-w-[2.5rem] rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
+            className="relative z-[2] flex items-center justify-center min-h-touch min-w-touch w-12 h-12 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
             aria-label="Ver carrinho"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,9 +66,9 @@ export function Header() {
 
           <button
             type="button"
-            className="relative z-[2] md:hidden flex items-center justify-center h-10 w-10 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
+            className="relative z-[2] md:hidden flex items-center justify-center min-h-touch min-w-touch w-12 h-12 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
             onClick={() => setMobileOpen((o) => !o)}
-            aria-expanded={mobileOpen}
+            aria-expanded={mobileOpen ? "true" : "false"}
             aria-controls="mobile-menu"
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
@@ -95,13 +95,13 @@ export function Header() {
             transition={{ duration: 0.2 }}
             className="md:hidden border-t border-phoenix-border bg-phoenix-surface"
           >
-            <nav className="container mx-auto flex flex-col px-4 py-4 gap-1" aria-label="Menu mobile">
+            <nav className="container flex flex-col py-4 gap-1 px-4 sm:px-6" aria-label="Menu mobile">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                    "min-h-touch flex items-center px-4 py-3 rounded-lg text-base font-medium transition-colors",
                     pathname === item.href
                       ? "text-phoenix-primary bg-phoenix-primary/10"
                       : "text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card"
