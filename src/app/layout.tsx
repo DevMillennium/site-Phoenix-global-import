@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
-import { LayoutConditional } from "@/components/layout/LayoutConditional";
+import { ClientLayout } from "@/components/layout/ClientLayout";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -63,7 +63,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased font-sans">
-        <LayoutConditional>{children}</LayoutConditional>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

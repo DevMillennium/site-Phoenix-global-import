@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface BotaoPagarCartaoProps {
   slug: string;
@@ -16,8 +17,10 @@ export function BotaoPagarCartao({
   children,
 }: BotaoPagarCartaoProps) {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleClick() {
+    setError(null);
     setLoading(true);
     try {
       const res = await fetch("/api/checkout", {
@@ -29,22 +32,38 @@ export function BotaoPagarCartao({
       if (!res.ok) throw new Error(data.error ?? "Erro ao iniciar pagamento");
       if (data.url) window.location.href = data.url;
     } catch (e) {
-      alert(e instanceof Error ? e.message : "Erro ao iniciar pagamento.");
+      setError(e instanceof Error ? e.message : "Erro ao iniciar pagamento. Tente novamente.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      disabled={loading}
-      className={className}
-      aria-busy={loading}
-      aria-label={loading ? "Abrindo página de pagamento..." : "Pagar com cartão"}
-    >
-      {loading ? "Abrindo checkout..." : children ?? "Pagar com cartão"}
-    </button>
+    <div className="flex flex-col gap-1">
+      <button
+        type="button"
+        onClick={handleClick}
+        disabled={loading}
+        className={cn(className, error && "border-phoenix-accent/50")}
+        aria-busy={loading}
+        aria-invalid={!!error}
+        aria-describedby={error ? "cartao-error" : undefined}
+        aria-label={loading ? "Abrindo página de pagamento..." : "Pagar com cartão"}
+      >
+        {loading ? "Abrindo checkout..." : children ?? "Pagar com cartão"}
+      </button>
+      {error && (
+        <p
+          id="cartao-error"
+          role="alert"
+          className="text-sm text-phoenix-accent flex items-center gap-1.5"
+        >
+          <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

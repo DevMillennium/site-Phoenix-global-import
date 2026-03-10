@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -17,6 +18,7 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <header className="sticky top-0 z-[9999] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto pt-[env(safe-area-inset-top)]">
@@ -57,11 +59,16 @@ export function Header() {
           <Link
             href="/carrinho"
             className="relative z-[2] flex items-center justify-center min-h-touch min-w-touch w-12 h-12 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
-            aria-label="Ver carrinho"
+            aria-label={totalItems > 0 ? `Ver carrinho (${totalItems} itens)` : "Ver carrinho"}
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
+            {totalItems > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-phoenix-primary px-1.5 text-xs font-medium text-white">
+                {totalItems > 99 ? "99+" : totalItems}
+              </span>
+            )}
           </Link>
 
           <button

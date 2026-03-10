@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getAllProducts } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
@@ -7,6 +8,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { BotaoPagarCartao } from "@/components/checkout/BotaoPagarCartao";
 import { LinkWhatsApp } from "@/components/checkout/LinkWhatsApp";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { PaymentStatusBanner } from "@/components/checkout/PaymentStatusBanner";
 import { getWhatsAppLink, absoluteUrl } from "@/lib/env";
 
 export async function generateStaticParams() {
@@ -49,6 +52,10 @@ export default async function ProdutoPage({
 
   return (
     <div className="container py-6 sm:py-8 md:py-12">
+      <Suspense fallback={null}>
+        <PaymentStatusBanner />
+      </Suspense>
+
       <nav aria-label="Breadcrumb" className="mb-4 sm:mb-6">
         <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm text-phoenix-text-muted">
           <li>
@@ -112,6 +119,12 @@ export default async function ProdutoPage({
             {product.description}
           </p>
           <div className="mt-6 sm:mt-8 flex flex-wrap gap-3">
+            <AddToCartButton
+              slug={product.slug}
+              name={product.name}
+              price={product.pricePix ?? product.price}
+              quantity={1}
+            />
             <LinkWhatsApp
               href={linkComprarWhatsApp}
               className="inline-flex items-center justify-center min-h-touch gap-2 rounded-lg bg-phoenix-success px-5 py-3 sm:px-6 font-medium text-white hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary touch-manipulation cursor-pointer"

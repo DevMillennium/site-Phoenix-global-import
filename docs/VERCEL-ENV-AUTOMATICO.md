@@ -1,6 +1,8 @@
 # Enviar variáveis do .env.local para a Vercel (automático)
 
-Execute **uma vez** para copiar STRIPE, SITE_URL e WHATSAPP do seu `.env.local` para a Vercel.
+Um único comando envia as variáveis do `.env.local` para a Vercel e **dispara o redeploy** em seguida.
+
+Para lista completa de variáveis e como obter as chaves Stripe, veja [DADOS-STRIPE-E-VERCEL.md](./DADOS-STRIPE-E-VERCEL.md).
 
 ## Passo 1: Token da Vercel
 
@@ -15,23 +17,21 @@ No painel do projeto na Vercel: **Settings** → **General** → **Project Name*
 
 ## Passo 3: Rodar o script
 
-No terminal, na pasta do projeto:
+Coloque no `.env.local` (além das variáveis do site e Stripe):
+
+- `VERCEL_TOKEN` — token da Vercel
+- `VERCEL_PROJECT` — nome do projeto (ex.: `site-phoenix-global-import`)
+- Se o projeto estiver em uma **equipe**: `VERCEL_TEAM_ID` — ID da equipe (Settings → General na Vercel)
+
+Depois, na pasta do projeto:
 
 ```bash
-VERCEL_TOKEN=seu_token_aqui VERCEL_PROJECT=nome-do-projeto npm run vercel:env
+npm run vercel:env
 ```
 
-Exemplo (substitua pelo seu token e nome do projeto):
+O script lê tudo do `.env.local`, envia as variáveis para a Vercel e **dispara o redeploy** automaticamente.
 
-```bash
-VERCEL_TOKEN=vercel_xxxx... VERCEL_PROJECT=phoenix-global npm run vercel:env
-```
-
-**Alternativa:** se você já rodou `vercel link` no projeto, não precisa de `VERCEL_PROJECT`:
-
-```bash
-VERCEL_TOKEN=seu_token npm run vercel:env
-```
+**Se aparecer 403 (Not authorized):** o projeto pode estar em uma equipe. Defina `VERCEL_TEAM_ID` no `.env.local` ou use um token com permissão de escrita em https://vercel.com/account/tokens.
 
 ## O que o script envia
 
@@ -42,4 +42,4 @@ VERCEL_TOKEN=seu_token npm run vercel:env
 
 (Todas as que existirem no `.env.local`.)
 
-Depois, faça um **Redeploy** no projeto na Vercel para as variáveis valerem no build.
+O script também **dispara o redeploy** após enviar as variáveis, para que elas passem a valer no build.
