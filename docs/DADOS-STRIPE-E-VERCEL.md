@@ -3,13 +3,15 @@
 Este documento consolida as variáveis e passos necessários para o site ficar **100% funcional**, com base nos commits do repositório e na integração Stripe + deploy na Vercel.
 
 > **Nota:** No projeto não há integração com “Vertex”; a publicação em produção é feita pela **Vercel**. Os dados abaixo cobrem Stripe (pagamento) e Vercel (ambiente de produção).
+>
+> **Site em produção:** quando o site for acessado em **phoenixglobal.com.br**, use a [Análise detalhada (Stripe, Vercel e phoenixglobal.com.br)](./ANALISE-ENV-PHOENIXGLOBAL.md) para conferir todos os elementos e o checklist de funcionamento real.
 
 ---
 
 ## 1. Variáveis de ambiente obrigatórias
 
 | Variável | Onde é usada | Onde obter |
-|----------|----------------|------------|
+| -------- | ------------- | ---------- |
 | `NEXT_PUBLIC_SITE_URL` | Sitemap, Open Graph, URLs de sucesso/cancelamento do Stripe, `absoluteUrl()` | Domínio do site (ex.: `https://phoenixglobal.com.br`) |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Todos os links `wa.me` (contato, cotação, carrinho, compra) | Número com DDI, sem `+` (ex.: `5585994482323`) |
 | `STRIPE_SECRET_KEY` | API `/api/checkout` — criação da sessão Stripe Checkout | [Stripe Dashboard → API Keys](https://dashboard.stripe.com/apikeys) (chave secreta, ex.: `sk_live_...`) |
@@ -17,7 +19,7 @@ Este documento consolida as variáveis e passos necessários para o site ficar *
 ### Opcional (para uso futuro no cliente)
 
 | Variável | Uso |
-|----------|-----|
+| -------- | --- |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe.js no front (ex.: formulário de cartão na própria página). Hoje o fluxo usa apenas redirect para Stripe Checkout. |
 
 ---
