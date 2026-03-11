@@ -33,10 +33,15 @@ export function BotaoPagarCartao({
       if (data.url) window.location.href = data.url;
     } catch (e) {
       setError(e instanceof Error ? e.message : "Erro ao iniciar pagamento. Tente novamente.");
-    } finally {
-      setLoading(false);
+  } finally {
+    setLoading(false);
     }
   }
+
+  const ariaProps: { "aria-busy": "true" | "false"; "aria-invalid": "true" | "false" } = {
+    "aria-busy": loading ? "true" : "false",
+    "aria-invalid": error ? "true" : "false",
+  };
 
   return (
     <div className="flex flex-col gap-1">
@@ -45,8 +50,7 @@ export function BotaoPagarCartao({
         onClick={handleClick}
         disabled={loading}
         className={cn(className, error && "border-phoenix-accent/50")}
-        aria-busy={loading}
-        aria-invalid={!!error}
+        {...ariaProps}
         aria-describedby={error ? "cartao-error" : undefined}
         aria-label={loading ? "Abrindo página de pagamento..." : "Pagar com cartão"}
       >

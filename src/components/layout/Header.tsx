@@ -19,6 +19,10 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { totalItems } = useCart();
+  const menuButtonAria: { "aria-expanded": "true" | "false"; "aria-controls": string } = {
+    "aria-expanded": mobileOpen ? "true" : "false",
+    "aria-controls": "mobile-menu",
+  };
 
   return (
     <header className="sticky top-0 z-[9999] isolate w-full border-b border-phoenix-border bg-phoenix-dark/95 backdrop-blur supports-[backdrop-filter]:bg-phoenix-dark/80 pointer-events-auto pt-[env(safe-area-inset-top)]">
@@ -75,8 +79,7 @@ export function Header() {
             type="button"
             className="relative z-[2] md:hidden flex items-center justify-center min-h-touch min-w-touch w-12 h-12 rounded-lg text-phoenix-text-muted hover:text-phoenix-text hover:bg-phoenix-card transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary cursor-pointer pointer-events-auto"
             onClick={() => setMobileOpen((o) => !o)}
-            aria-expanded={mobileOpen ? "true" : "false"}
-            aria-controls="mobile-menu"
+            {...menuButtonAria}
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           >
             {mobileOpen ? (
