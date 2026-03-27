@@ -2,14 +2,20 @@
   "name": "phoenix-global",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "dev": "next dev --turbopack --hostname 0.0.0.0",
     "dev:open": "npm run dev & node scripts/abrir-navegador.js",
     "build": "next build",
     "start": "next start",
     "start:open": "npm run start & node scripts/abrir-navegador.js",
     "lint": "next lint",
-    "vercel:env": "node scripts/enviar-env-vercel.js"
+    "vercel:env": "node scripts/enviar-env-vercel.js",
+    "vercel:check": "node scripts/verificar-env-vercel.js",
+    "config:abrir": "node scripts/abrir-config-vercel-stripe.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.9.0",

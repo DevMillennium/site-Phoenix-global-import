@@ -5,18 +5,23 @@ import { getWhatsAppLink } from "@/lib/env";
 const footerLinks = {
   Loja: [
     { href: "/produtos", label: "Todos os produtos" },
-    { href: "/produtos?categoria=audio", label: "Áudio" },
-    { href: "/produtos?categoria=cameras", label: "Câmeras" },
-    { href: "/produtos?categoria=gaming", label: "Gaming" },
-    { href: "/produtos?categoria=wearables", label: "Wearables" },
-    { href: "/produtos?categoria=acessorios", label: "Acessórios" },
-    { href: "/produtos?categoria=conectividade", label: "Conectividade" },
-    { href: "/produtos?categoria=cosmeticos", label: "Cosméticos" },
+    { href: "/categoria/audio", label: "Áudio" },
+    { href: "/categoria/cameras", label: "Câmeras" },
+    { href: "/categoria/gaming", label: "Gaming" },
+    { href: "/categoria/wearables", label: "Wearables" },
+    { href: "/categoria/acessorios", label: "Acessórios" },
+    { href: "/categoria/conectividade", label: "Conectividade" },
+    { href: "/categoria/cosmeticos", label: "Cosméticos" },
   ],
   Empresa: [
     { href: "/sobre", label: "Sobre nós" },
     { href: "/contato", label: "Contato" },
     { href: "/contato#cotacao", label: "Solicitar cotação" },
+  ],
+  Politicas: [
+    { href: "/politicas/envio", label: "Envio e entrega" },
+    { href: "/politicas/troca", label: "Troca e devolução" },
+    { href: "/politicas/privacidade", label: "Privacidade" },
   ],
 };
 
@@ -28,7 +33,7 @@ export function Footer() {
   return (
     <footer className="border-t border-phoenix-border bg-phoenix-surface pb-[env(safe-area-inset-bottom)]">
       <div className="container py-10 sm:py-12">
-        <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div>
             <Link href="/" className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-phoenix-primary rounded">
               <Image
@@ -67,6 +72,22 @@ export function Footer() {
             <h3 className="font-semibold text-phoenix-text mb-3">Empresa</h3>
             <ul className="space-y-1 sm:space-y-2">
               {footerLinks.Empresa.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="min-h-touch flex items-center py-2 text-sm text-phoenix-text-muted hover:text-phoenix-primary transition-colors touch-manipulation"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-phoenix-text mb-3">Políticas</h3>
+            <ul className="space-y-1 sm:space-y-2">
+              {footerLinks.Politicas.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}

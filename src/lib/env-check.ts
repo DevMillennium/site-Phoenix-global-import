@@ -43,22 +43,30 @@ export function checkSiteEnv(): EnvCheckResult {
 
 /**
  * Verifica se o Stripe está configurado para a rota de checkout.
- * Exige STRIPE_SECRET_KEY com tamanho mínimo (evita chave placeholder).
+ * Conforme Stripe Authentication: https://docs.stripe.com/api/authentication
+ * Exige STRIPE_SECRET_KEY com prefixo sk_test_ ou sk_live_ (nunca pk_).
  */
 export function checkStripeEnv(): EnvCheckResult {
   const secret = process.env[ENV_KEYS.STRIPE_SECRET];
-  const stripeSecretOk =
-    typeof secret === "string" && secret.length >= 20 && !secret.includes("...");
+  const isString = typeof secret === "string" && secret.trim().length > 0;
+  const validPrefix = isString && (secret!.startsWith("sk_test_") || secret!.startsWith("sk_live_"));
+  const noPlaceholder = isString && !secret!.includes("...");
+  const stripeSecretOk = isString && secret!.length >= 20 && noPlaceholder && validPrefix;
   const missing: string[] = [];
   if (!stripeSecretOk) missing.push(ENV_KEYS.STRIPE_SECRET);
+
+  let message: string | undefined;
+  if (missing.length > 0) {
+    if (isString && secret!.startsWith("pk_"))
+      message = "Use a Secret key (sk_live_ ou sk_test_), não a Publishable key. Veja https://dashboard.stripe.com/apikeys";
+    else
+      message = "Configure STRIPE_SECRET_KEY na Vercel (Production). Obtenha em https://dashboard.stripe.com/apikeys";
+  }
 
   return {
     ok: missing.length === 0,
     missing,
     stripeReady: stripeSecretOk,
-    message:
-      missing.length > 0
-        ? "Configure STRIPE_SECRET_KEY na Vercel (Production). Obtenha em https://dashboard.stripe.com/apikeys"
-        : undefined,
+    message,
   };
 }

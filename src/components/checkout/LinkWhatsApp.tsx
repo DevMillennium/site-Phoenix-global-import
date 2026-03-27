@@ -1,5 +1,7 @@
 "use client";
 
+import { getWhatsAppLink } from "@/lib/env";
+
 interface LinkWhatsAppProps {
   href: string;
   children: React.ReactNode;
@@ -7,16 +9,19 @@ interface LinkWhatsAppProps {
   ariaLabel?: string;
 }
 
+const FALLBACK_MESSAGE = "Olá! Gostaria de mais informações.";
+
 /** Abre o link do WhatsApp (funciona dentro de iframe, ex.: emulador mobile). */
 export function LinkWhatsApp({ href, children, className, ariaLabel }: LinkWhatsAppProps) {
   const openWhatsApp = (e: React.MouseEvent) => {
-    if (!href || !href.startsWith("https://wa.me/")) return;
+    const link = href && href.startsWith("https://wa.me/") ? href : getWhatsAppLink(FALLBACK_MESSAGE);
+    if (!link.startsWith("https://wa.me/")) return;
     e.preventDefault();
     const w = typeof window !== "undefined" ? window.top ?? window : null;
-    if (w) w.open(href, "_blank", "noopener,noreferrer");
+    if (w) w.open(link, "_blank", "noopener,noreferrer");
   };
 
-  const validHref = href && href.startsWith("https://wa.me/") ? href : `https://wa.me/5585994482323?text=${encodeURIComponent("Olá! Gostaria de mais informações.")}`;
+  const validHref = href && href.startsWith("https://wa.me/") ? href : getWhatsAppLink(FALLBACK_MESSAGE);
 
   return (
     <a

@@ -37,7 +37,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             unoptimized={process.env.NODE_ENV === "development"}
           />
-          {product.videoUrl && (
+          {product.videoUrl && /^https?:\/\//i.test(product.videoUrl) && (
             <span
               className="absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white"
               aria-hidden

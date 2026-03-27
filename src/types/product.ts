@@ -22,6 +22,8 @@ export interface Product {
   images: string[];
   videoUrl?: string;
   specs?: Record<string, string>;
+  /** Perguntas específicas do produto (opcional); caso vazio, usa FAQ padrão na PDP. */
+  faq?: { question: string; answer: string }[];
   views?: number;
   inStock: boolean;
   featured?: boolean;

@@ -24,7 +24,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["original", "pronta-entrega"],
     images: ["/produtos/airpods-4.png"],
-    videoUrl: "#",
     views: 18200,
     inStock: true,
     featured: true,
@@ -43,7 +42,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["pronta-entrega"],
     images: ["/produtos/redmi-buds-6-pro-preto.png"],
-    videoUrl: "#",
     views: 570,
     inStock: true,
     featured: true,
@@ -70,6 +68,13 @@ export const products: Product[] = [
     id: "3",
     slug: "starlink-mini",
     name: "Starlink Mini",
+    faq: [
+      {
+        question: "Por que está como seminovo?",
+        answer:
+          "Este item foi aberto apenas para teste. Conferimos funcionamento antes do anúncio. Dúvidas? Chame no WhatsApp.",
+      },
+    ],
     shortDescription: "Aberto apenas para teste. Pronta entrega!",
     description:
       "Kit Starlink Mini, produto praticamente novo. Ideal para conexão em áreas remotas.",
@@ -96,7 +101,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["original", "pronta-entrega"],
     images: ["/produtos/sony-zv-e10.png"],
-    videoUrl: "#",
     views: 13200,
     inStock: true,
     featured: true,
@@ -115,7 +119,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["original", "pronta-entrega"],
     images: ["/produtos/insta360-x4.png"],
-    videoUrl: "#",
     views: 8900,
     inStock: true,
     quantity: 1,
@@ -133,7 +136,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["original", "pronta-entrega"],
     images: ["/produtos/gopro-max-360.png"],
-    videoUrl: "#",
     views: 5400,
     inStock: true,
     quantity: 1,
@@ -151,7 +153,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["pronta-entrega"],
     images: ["/produtos/dji-osmo-pocket-3.png"],
-    videoUrl: "#",
     views: 3100,
     inStock: true,
     quantity: 1,
@@ -219,7 +220,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["pronta-entrega"],
     images: ["/produtos/amazfit-bip-5.png"],
-    videoUrl: "#",
     views: 3900,
     inStock: true,
     quantity: 5,
@@ -237,7 +237,6 @@ export const products: Product[] = [
     condition: "novo",
     badges: ["original", "pronta-entrega", "destaque"],
     images: ["/produtos/nintendo-switch-2.png"],
-    videoUrl: "#",
     views: 12500,
     inStock: true,
     featured: true,
@@ -292,4 +291,8 @@ export function getProductsByCategory(slug: string): Product[] {
 
 export function getAllProducts(): Product[] {
   return products;
+}
+
+export function getCategoryBySlug(slug: string) {
+  return categories.find((c) => c.slug === slug);
 }
