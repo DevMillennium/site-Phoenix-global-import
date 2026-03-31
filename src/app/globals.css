@@ -15,6 +15,13 @@
   --phoenix-text: #f8f8f8;
   --phoenix-text-muted: #a0a0a0;
   --phoenix-success: #2d6a4f;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --space-section-sm: 3rem;
+  --space-section-md: 4rem;
+  --space-section-lg: 5rem;
+  --shadow-soft: 0 6px 24px rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -31,12 +38,25 @@ html {
 body {
   background-color: var(--phoenix-dark);
   color: var(--phoenix-text);
-  font-size: 16px; /* Evita zoom automático no iOS em inputs */
+  font-size: 16px;
+  /* Evita zoom automático no iOS em inputs */
   min-height: 100vh;
   min-height: 100dvh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Safe area: use em elementos fixos/sticky (header, footer) via classes */
@@ -79,10 +99,12 @@ body {
   height: var(--emh);
   min-height: var(--emh);
 }
+
 .emulador-inner {
   width: var(--ifw);
   height: var(--ifh);
 }
+
 .emulador-iframe {
   width: var(--ifw);
   height: var(--ifh);
