@@ -32,9 +32,9 @@ export function HomeConversionSections() {
                 href="/produtos"
                 size="md"
                 trackingEvent="cta_click"
-                trackingPayload={{ source: "home_problem_solution", action: "explorar_catalogo", destination: "/produtos" }}
+                trackingPayload={{ source: "home_problem_solution", action: "explorar_pronta_entrega", destination: "/produtos" }}
               >
-                Explorar catalogo
+                Explorar pronta entrega
               </Button>
               <Button
                 href="/contato#cotacao"
@@ -47,7 +47,7 @@ export function HomeConversionSections() {
                   destination: "/contato#cotacao",
                 }}
               >
-                Falar com especialista
+                Falar com especialista agora
               </Button>
             </div>
           </motion.article>
@@ -133,7 +133,7 @@ export function HomeConversionSections() {
                 trackingEvent="cta_click"
                 trackingPayload={{ source: "home_final_cta", action: "ver_produtos_agora", destination: "/produtos" }}
               >
-                Ver produtos agora
+                Ver produtos com envio nacional
               </Button>
               <Button
                 href="/contato#cotacao"
@@ -142,7 +142,7 @@ export function HomeConversionSections() {
                 trackingEvent="cta_click"
                 trackingPayload={{ source: "home_final_cta", action: "pedir_cotacao", destination: "/contato#cotacao" }}
               >
-                Pedir cotacao
+                Pedir cotacao personalizada
               </Button>
             </div>
           </motion.div>

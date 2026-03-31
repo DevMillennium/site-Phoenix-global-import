@@ -30,30 +30,40 @@ export function HomeHero() {
           className="max-w-2xl"
         >
           <h1 className="font-display text-3xl font-bold tracking-tight text-phoenix-text xs:text-4xl md:text-5xl lg:text-6xl">
-            Eletrônicos e tecnologia{" "}
-            <span className="bg-gradient-phoenix bg-clip-text text-transparent">importados</span>
+            Tecnologia importada{" "}
+            <span className="bg-gradient-phoenix bg-clip-text text-transparent">original</span>, pronta entrega
           </h1>
           <p className="mt-3 sm:mt-4 text-base text-phoenix-text-muted sm:text-lg md:text-xl">
-            Estoque em Fortaleza, Ceará. Enviamos para todo o Brasil. Pronta entrega, produtos originais e
-            as melhores marcas.
+            Estoque local em Fortaleza, envio para todo o Brasil e suporte consultivo no WhatsApp para compra sem risco.
           </p>
+          <ul className="mt-5 flex flex-wrap gap-2 text-xs sm:text-sm">
+            <li className="rounded-full border border-phoenix-border bg-phoenix-card/80 px-3 py-1.5 text-phoenix-text">
+              Produtos originais
+            </li>
+            <li className="rounded-full border border-phoenix-border bg-phoenix-card/80 px-3 py-1.5 text-phoenix-text">
+              Estoque em Fortaleza
+            </li>
+            <li className="rounded-full border border-phoenix-border bg-phoenix-card/80 px-3 py-1.5 text-phoenix-text">
+              Pagamento seguro via Stripe
+            </li>
+          </ul>
           <div className="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
             <Button
               href="/produtos"
               size="lg"
               trackingEvent="cta_click"
-              trackingPayload={{ source: "home_hero", action: "ver_produtos", destination: "/produtos" }}
+              trackingPayload={{ source: "home_hero", action: "ver_pronta_entrega", destination: "/produtos" }}
             >
-              Ver produtos
+              Ver pronta entrega
             </Button>
             <Button
               href="/contato#cotacao"
               variant="outline"
               size="lg"
               trackingEvent="cta_click"
-              trackingPayload={{ source: "home_hero", action: "solicitar_cotacao", destination: "/contato#cotacao" }}
+              trackingPayload={{ source: "home_hero", action: "cotacao_whatsapp", destination: "/contato#cotacao" }}
             >
-              Solicitar cotação
+              Receber cotação no WhatsApp
             </Button>
           </div>
         </motion.div>

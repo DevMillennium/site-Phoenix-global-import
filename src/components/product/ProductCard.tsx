@@ -14,6 +14,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const productUrl = `/produtos/${product.slug}`;
+  const hasOriginalBadge = product.badges.includes("original");
 
   return (
     <motion.article
@@ -82,6 +83,21 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
                   : product.views}
               </span>
             )}
+          </div>
+          <div className="mt-3 flex flex-wrap gap-1.5 text-[11px]">
+            {product.inStock && (
+              <span className="rounded-full border border-phoenix-success/40 bg-phoenix-success/10 px-2.5 py-1 text-emerald-300">
+                Pronta entrega
+              </span>
+            )}
+            {hasOriginalBadge && (
+              <span className="rounded-full border border-phoenix-primary/40 bg-phoenix-primary/10 px-2.5 py-1 text-phoenix-primary-hover">
+                Original
+              </span>
+            )}
+            <span className="rounded-full border border-phoenix-border px-2.5 py-1 text-phoenix-text-muted">
+              Estoque local em Fortaleza
+            </span>
           </div>
         </div>
       </Link>
