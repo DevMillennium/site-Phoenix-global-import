@@ -1,9 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
 export function HomeHero() {
+  const [videoSrc, setVideoSrc] = useState("/hero-abertura.mp4");
+
+  useEffect(() => {
+    const selectVideoSource = () => {
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      setVideoSrc(isMobile ? "/hero-abertura-sem-marca.mp4" : "/hero-abertura.mp4");
+    };
+
+    selectVideoSource();
+    window.addEventListener("resize", selectVideoSource);
+    return () => window.removeEventListener("resize", selectVideoSource);
+  }, []);
+
   return (
     <section className="relative min-h-[50dvh] sm:min-h-[60dvh] md:min-h-[70vh] w-full overflow-hidden border-b border-phoenix-border bg-phoenix-dark">
       <video
@@ -12,14 +26,14 @@ export function HomeHero() {
         loop
         playsInline
         preload="metadata"
-        poster="/logo-phoenix-global.png"
-        className="absolute inset-0 h-full w-full object-cover object-top md:object-center md:translate-x-[5rem] lg:translate-x-[10cm]"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+        style={{ filter: "saturate(1.06) contrast(1.04)" }}
         aria-label="Vídeo de abertura Phoenix Global Import"
       >
-        <source src="/hero-abertura.mp4" type="video/mp4" />
+        <source src={videoSrc} type="video/mp4" />
       </video>
       <div
-        className="absolute inset-0 bg-gradient-to-t from-phoenix-dark/90 via-phoenix-dark/40 to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-phoenix-dark/80 via-phoenix-dark/35 to-transparent"
         aria-hidden
       />
       <div className="container relative z-10 flex min-h-[50dvh] sm:min-h-[60dvh] md:min-h-[70vh] flex-col justify-end pb-8 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-12">
