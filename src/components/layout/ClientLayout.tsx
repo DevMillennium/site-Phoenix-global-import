@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { AnalyticsEventBridge } from "@/components/analytics/AnalyticsEventBridge";
 import { AnalyticsPageViewTracker } from "@/components/analytics/AnalyticsPageViewTracker";
 import { CartProvider } from "@/context/CartContext";
@@ -9,7 +10,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
     <CartProvider>
       <AnalyticsEventBridge />
-      <AnalyticsPageViewTracker />
+      <Suspense fallback={null}>
+        <AnalyticsPageViewTracker />
+      </Suspense>
       <LayoutConditional>{children}</LayoutConditional>
     </CartProvider>
   );
