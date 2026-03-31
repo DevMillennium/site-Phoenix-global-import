@@ -27,6 +27,7 @@ Levar o projeto para operacao orientada por dados reais em producao, sem regress
 - `src/lib/analytics.ts`
 - `src/components/layout/ClientLayout.tsx`
 - `src/components/checkout/PaymentStatusBanner.tsx`
+- `docs/MATRIZ-METAS-GA4-PRODUCAO.md`
 
 ## Como operar com as chaves ja existentes
 
