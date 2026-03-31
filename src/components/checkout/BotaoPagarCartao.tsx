@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 interface BotaoPagarCartaoProps {
@@ -22,6 +23,12 @@ export function BotaoPagarCartao({
   async function handleClick() {
     setError(null);
     setLoading(true);
+    trackEvent("begin_checkout", {
+      source: "pdp",
+      mode: "single_product",
+      item_slug: slug,
+      quantity,
+    });
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -32,9 +39,14 @@ export function BotaoPagarCartao({
       if (!res.ok) throw new Error(data.error ?? "Erro ao iniciar pagamento");
       if (data.url) window.location.href = data.url;
     } catch (e) {
+      trackEvent("checkout_error", {
+        source: "pdp",
+        mode: "single_product",
+        item_slug: slug,
+      });
       setError(e instanceof Error ? e.message : "Erro ao iniciar pagamento. Tente novamente.");
-  } finally {
-    setLoading(false);
+    } finally {
+      setLoading(false);
     }
   }
 

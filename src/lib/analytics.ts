@@ -1,4 +1,4 @@
-type EventPayload = Record<string, string | number | boolean | null | undefined>;
+type EventPayload = Record<string, unknown>;
 
 declare global {
   interface Window {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 interface BotaoPagarCartaoCarrinhoProps {
@@ -20,6 +21,12 @@ export function BotaoPagarCartaoCarrinho({ className }: BotaoPagarCartaoCarrinho
     if (items.length === 0) return;
     setError(null);
     setLoading(true);
+    trackEvent("begin_checkout", {
+      source: "cart",
+      mode: "cart",
+      items_count: items.length,
+      total_quantity: items.reduce((acc, item) => acc + item.quantity, 0),
+    });
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -32,6 +39,11 @@ export function BotaoPagarCartaoCarrinho({ className }: BotaoPagarCartaoCarrinho
       if (!res.ok) throw new Error(data.error ?? "Erro ao iniciar pagamento");
       if (data.url) window.location.href = data.url;
     } catch (e) {
+      trackEvent("checkout_error", {
+        source: "cart",
+        mode: "cart",
+        items_count: items.length,
+      });
       setError(e instanceof Error ? e.message : "Erro ao iniciar pagamento. Tente novamente.");
     } finally {
       setLoading(false);

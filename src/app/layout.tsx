@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
+import { AnalyticsScripts } from "@/components/analytics/AnalyticsScripts";
 import { ClientLayout } from "@/components/layout/ClientLayout";
 import "./globals.css";
 
@@ -63,6 +64,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased font-sans">
+        <AnalyticsScripts />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

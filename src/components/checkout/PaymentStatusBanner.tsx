@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 type Status = "sucesso" | "cancelado" | null;
@@ -12,6 +13,7 @@ export function PaymentStatusBanner() {
   const pathname = usePathname();
   const [dismissed, setDismissed] = useState(false);
   const status = searchParams.get("pagamento") as Status;
+  const sessionId = searchParams.get("session_id");
 
   const isSucesso = status === "sucesso";
   const isCancelado = status === "cancelado";
@@ -29,6 +31,30 @@ export function PaymentStatusBanner() {
     const t = setTimeout(clearParam, 8000);
     return () => clearTimeout(t);
   }, [show, clearParam]);
+
+  useEffect(() => {
+    if (!status) return;
+    const dedupeKey = `phoenix-payment-event:${status}:${sessionId ?? "no-session"}:${pathname}`;
+    if (typeof window !== "undefined" && window.sessionStorage.getItem(dedupeKey)) return;
+
+    if (status === "sucesso") {
+      trackEvent("purchase_success", {
+        source: pathname.includes("/carrinho") ? "cart" : "pdp",
+        session_id: sessionId ?? "nao_informado",
+        page_path: pathname,
+      });
+    } else if (status === "cancelado") {
+      trackEvent("purchase_cancelled", {
+        source: pathname.includes("/carrinho") ? "cart" : "pdp",
+        session_id: sessionId ?? "nao_informado",
+        page_path: pathname,
+      });
+    }
+
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem(dedupeKey, "1");
+    }
+  }, [status, sessionId, pathname]);
 
   function handleDismiss() {
     setDismissed(true);

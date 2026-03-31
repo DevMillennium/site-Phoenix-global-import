@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 interface AddToCartButtonProps {
@@ -26,6 +27,14 @@ export function AddToCartButton({
 
   function handleClick() {
     addItem({ slug, name, price, quantity });
+    trackEvent("add_to_cart", {
+      source: "product_page",
+      item_slug: slug,
+      item_name: name,
+      quantity,
+      value: Number((price * quantity).toFixed(2)),
+      currency: "BRL",
+    });
     setFeedback(true);
     setTimeout(() => setFeedback(false), 2000);
   }
