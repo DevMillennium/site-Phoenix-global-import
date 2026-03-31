@@ -9,6 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   children: React.ReactNode;
   className?: string;
+  trackingEvent?: string;
+  trackingPayload?: Record<string, unknown>;
 }
 
 const variants = {
@@ -33,6 +35,8 @@ export function Button({
   href,
   children,
   className,
+  trackingEvent,
+  trackingPayload,
   ...props
 }: ButtonProps) {
   const base =
@@ -41,15 +45,28 @@ export function Button({
   const combined = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
+    const trackPayload = trackingPayload ? JSON.stringify(trackingPayload) : undefined;
     return (
-      <Link href={href} className={combined} aria-label={typeof children === "string" ? children : "Ação"}>
+      <Link
+        href={href}
+        className={combined}
+        aria-label={typeof children === "string" ? children : "Ação"}
+        data-track-event={trackingEvent}
+        data-track-payload={trackPayload}
+      >
         {children}
       </Link>
     );
   }
 
   return (
-    <button type="button" className={combined} {...props}>
+    <button
+      type="button"
+      className={combined}
+      data-track-event={trackingEvent}
+      data-track-payload={trackingPayload ? JSON.stringify(trackingPayload) : undefined}
+      {...props}
+    >
       {children}
     </button>
   );

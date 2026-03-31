@@ -38,10 +38,21 @@ export function HomeHero() {
             as melhores marcas.
           </p>
           <div className="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
-            <Button href="/produtos" size="lg">
+            <Button
+              href="/produtos"
+              size="lg"
+              trackingEvent="cta_click"
+              trackingPayload={{ source: "home_hero", action: "ver_produtos", destination: "/produtos" }}
+            >
               Ver produtos
             </Button>
-            <Button href="/contato#cotacao" variant="outline" size="lg">
+            <Button
+              href="/contato#cotacao"
+              variant="outline"
+              size="lg"
+              trackingEvent="cta_click"
+              trackingPayload={{ source: "home_hero", action: "solicitar_cotacao", destination: "/contato#cotacao" }}
+            >
               Solicitar cotação
             </Button>
           </div>

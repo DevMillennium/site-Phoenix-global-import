@@ -28,10 +28,25 @@ export function HomeConversionSections() {
             <h3 className="font-display text-xl font-semibold text-phoenix-text md:text-2xl">Nossa solucao</h3>
             <p className="mt-4 text-phoenix-text-muted">{siteStrategy.propostaDeValor}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="/produtos" size="md">
+              <Button
+                href="/produtos"
+                size="md"
+                trackingEvent="cta_click"
+                trackingPayload={{ source: "home_problem_solution", action: "explorar_catalogo", destination: "/produtos" }}
+              >
                 Explorar catalogo
               </Button>
-              <Button href="/contato#cotacao" variant="outline" size="md">
+              <Button
+                href="/contato#cotacao"
+                variant="outline"
+                size="md"
+                trackingEvent="cta_click"
+                trackingPayload={{
+                  source: "home_problem_solution",
+                  action: "falar_com_especialista",
+                  destination: "/contato#cotacao",
+                }}
+              >
                 Falar com especialista
               </Button>
             </div>
@@ -112,10 +127,21 @@ export function HomeConversionSections() {
               Acesse o catalogo para pronta entrega ou envie sua cotacao para atendimento especializado.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Button href="/produtos" size="lg">
+              <Button
+                href="/produtos"
+                size="lg"
+                trackingEvent="cta_click"
+                trackingPayload={{ source: "home_final_cta", action: "ver_produtos_agora", destination: "/produtos" }}
+              >
                 Ver produtos agora
               </Button>
-              <Button href="/contato#cotacao" variant="outline" size="lg">
+              <Button
+                href="/contato#cotacao"
+                variant="outline"
+                size="lg"
+                trackingEvent="cta_click"
+                trackingPayload={{ source: "home_final_cta", action: "pedir_cotacao", destination: "/contato#cotacao" }}
+              >
                 Pedir cotacao
               </Button>
             </div>
