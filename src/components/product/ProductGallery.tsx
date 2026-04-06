@@ -4,13 +4,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+import { OutOfStockOverlay } from "@/components/product/OutOfStockOverlay";
+
 interface ProductGalleryProps {
   images: string[];
   alt: string;
   priority?: boolean;
+  /** Exibe tarja “Esgotado” sobre a foto principal. */
+  outOfStock?: boolean;
 }
 
-export function ProductGallery({ images, alt, priority }: ProductGalleryProps) {
+export function ProductGallery({ images, alt, priority, outOfStock }: ProductGalleryProps) {
   const list = images.length > 0 ? images : ["/logo-phoenix-global.png"];
   const [active, setActive] = useState(0);
   const safeIndex = Math.min(active, list.length - 1);
@@ -28,6 +32,7 @@ export function ProductGallery({ images, alt, priority }: ProductGalleryProps) {
           priority={priority}
           unoptimized={process.env.NODE_ENV === "development"}
         />
+        {outOfStock && <OutOfStockOverlay />}
       </div>
       {list.length > 1 && (
         <div className="flex flex-wrap gap-2" role="group" aria-label="Miniaturas da galeria">

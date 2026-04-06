@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { formatPrice } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
+import { OutOfStockOverlay } from "@/components/product/OutOfStockOverlay";
 import type { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -38,6 +39,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             unoptimized={process.env.NODE_ENV === "development"}
           />
+          {!product.inStock && <OutOfStockOverlay />}
           {product.videoUrl && /^https?:\/\//i.test(product.videoUrl) && (
             <span
               className="absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white"
@@ -85,7 +87,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             )}
           </div>
           <div className="mt-3 flex flex-wrap gap-1.5 text-[11px]">
-            {product.inStock && (
+            {!product.inStock ? (
+              <span className="rounded-full border border-red-500/50 bg-red-600/20 px-2.5 py-1 text-red-300">
+                Esgotado
+              </span>
+            ) : (
               <span className="rounded-full border border-phoenix-success/40 bg-phoenix-success/10 px-2.5 py-1 text-emerald-300">
                 Pronta entrega
               </span>
@@ -96,7 +102,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               </span>
             )}
             <span className="rounded-full border border-phoenix-border px-2.5 py-1 text-phoenix-text-muted">
-              Estoque local em Fortaleza
+              {product.inStock ? "Estoque local em Fortaleza" : "Importação sob consulta"}
             </span>
           </div>
         </div>

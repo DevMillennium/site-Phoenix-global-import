@@ -7,7 +7,7 @@ export const categories = [
   { name: "Wearables", slug: "wearables", count: 1 },
   { name: "Acessórios", slug: "acessorios", count: 2 },
   { name: "Conectividade", slug: "conectividade", count: 1 },
-  { name: "Cosméticos", slug: "cosmeticos", count: 1 },
+  { name: "Cosméticos", slug: "cosmeticos", count: 3 },
 ];
 
 export const products: Product[] = [
@@ -201,11 +201,11 @@ export const products: Product[] = [
     category: "Áudio",
     categorySlug: "audio",
     condition: "novo",
-    badges: ["original", "pronta-entrega"],
+    badges: ["original"],
     images: ["/produtos/pioneer-ddj-400.png"],
     views: 2100,
-    inStock: true,
-    quantity: 1,
+    inStock: false,
+    quantity: 0,
   },
   {
     id: "11",
@@ -274,6 +274,40 @@ export const products: Product[] = [
     images: ["/produtos/gabaon-premium-cream.png"],
     inStock: true,
     quantity: 23,
+  },
+  {
+    id: "16",
+    slug: "gabaon-mascara-colageno-essence",
+    name: "Gabaon Máscara de Colágeno Essence",
+    shortDescription: "Máscara facial com colágeno. Firmeza e glow.",
+    description:
+      "Gabaon Collagen Essence Mask. Máscara facial em tecido com essência de colágeno. Firmeza e luminosidade. Caixa com 3 unidades (30 g cada sachê). Produto importado.",
+    price: 110,
+    category: "Cosméticos",
+    categorySlug: "cosmeticos",
+    condition: "novo",
+    badges: ["pronta-entrega"],
+    images: ["/produtos/gabaon-mascara-colageno-essence.png"],
+    views: 420,
+    inStock: true,
+    quantity: 8,
+  },
+  {
+    id: "17",
+    slug: "gabaon-mascara-acido-hialuronico",
+    name: "Gabaon Máscara de Ácido Hialurônico",
+    shortDescription: "Máscara facial com ácido hialurônico. Hidratação e glow.",
+    description:
+      "Gabaon Hyaluronic Acid Mask. Máscara facial em tecido com ácido hialurônico. Hidratação intensa e luminosidade. Caixa com 3 unidades (30 g cada sachê). Produto importado.",
+    price: 110,
+    category: "Cosméticos",
+    categorySlug: "cosmeticos",
+    condition: "novo",
+    badges: ["pronta-entrega"],
+    images: ["/produtos/gabaon-mascara-acido-hialuronico.png"],
+    views: 380,
+    inStock: true,
+    quantity: 8,
   },
 ];
 
