@@ -46,11 +46,15 @@ export function Button({
 
   if (href) {
     const trackPayload = trackingPayload ? JSON.stringify(trackingPayload) : undefined;
+    const linkAria =
+      typeof children === "string"
+        ? undefined
+        : ({ "aria-label": "Ação" } as const);
     return (
       <Link
         href={href}
         className={combined}
-        aria-label={typeof children === "string" ? children : "Ação"}
+        {...linkAria}
         data-track-event={trackingEvent}
         data-track-payload={trackPayload}
       >

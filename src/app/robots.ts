@@ -8,7 +8,11 @@ function getBaseUrl(): string {
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = getBaseUrl();
   return {
-    rules: { userAgent: "*", allow: "/" },
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/teste-alteracoes", "/emulador-mobile"],
+    },
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

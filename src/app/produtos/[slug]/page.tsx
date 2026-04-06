@@ -34,6 +34,12 @@ export async function generateMetadata({
       images: imageUrl ? [imageUrl] : [],
       url: canonical,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: product.shortDescription,
+      images: imageUrl ? [imageUrl] : [],
+    },
   };
 }
 
@@ -51,8 +57,7 @@ export default async function ProdutoPage({
   const imageUrl = product.images[0] ? absoluteUrl(product.images[0]) : undefined;
   const offerPrice = product.pricePix ?? product.price;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
+  const productJsonLd = {
     "@type": "Product",
     name: product.name,
     description: product.description,
@@ -75,6 +80,41 @@ export default async function ProdutoPage({
         name: SITE_BRAND_NAME,
       },
     },
+  };
+
+  const breadcrumbJsonLd = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: absoluteUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Produtos",
+        item: absoluteUrl("/produtos"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.category,
+        item: absoluteUrl(`/categoria/${product.categorySlug}`),
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: product.name,
+        item: productUrl,
+      },
+    ],
+  };
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [productJsonLd, breadcrumbJsonLd],
   };
 
   return (

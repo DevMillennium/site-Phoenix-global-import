@@ -3,7 +3,7 @@ export const siteStrategy = {
   objetivoPrincipal: "Aumentar a taxa de conversao da home para contato e navegacao em produtos.",
   icpPrimario: {
     nome: "Comprador de tecnologia premium",
-    perfil: "Pessoa fisica ou pequena empresa que busca eletronicos originais com pronta entrega no Brasil.",
+    perfil: "Pessoa física ou pequena empresa que busca eletrônicos originais com pronta entrega no Brasil.",
     dores: [
       "Medo de comprar produto falso ou sem garantia real.",
       "Prazo de entrega incerto em compras internacionais.",
@@ -11,7 +11,7 @@ export const siteStrategy = {
     ],
   },
   propostaDeValor:
-    "Eletronicos importados originais com estoque local em Fortaleza, envio nacional e suporte consultivo rapido.",
+    "Eletrônicos importados originais com estoque local em Fortaleza, envio nacional e suporte consultivo rápido.",
   metasIniciais: {
     ctrHeroProdutosMinimo: "8%",
     ctrHeroCotacaoMinimo: "4%",

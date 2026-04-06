@@ -49,6 +49,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Phoenix Global Import",
+    title: "Phoenix Global Import | Eletrônicos e Tecnologia — Fortaleza",
+    description:
+      "Eletrônicos e tecnologia importados. Estoque em Fortaleza, Ceará. Enviamos para todo o Brasil. AirPods, câmeras, gaming, wearables e mais. Pronta entrega.",
+    url: "/",
+    images: [{ url: "/logo-phoenix-global.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Phoenix Global Import | Eletrônicos e Tecnologia — Fortaleza",
+    description:
+      "Eletrônicos e tecnologia importados. Estoque em Fortaleza, Ceará. Enviamos para todo o Brasil. AirPods, câmeras, gaming, wearables e mais. Pronta entrega.",
+    images: ["/logo-phoenix-global.png"],
   },
   robots: "index, follow",
 };
