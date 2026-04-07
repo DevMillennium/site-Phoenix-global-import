@@ -17,8 +17,13 @@ const CHAVES_OBRIGATORIAS = [
   "NEXT_PUBLIC_WHATSAPP_NUMBER",
 ];
 /** Chaves que a API da Vercel pode não listar (secretas); usamos .env.local como fallback */
-const CHAVES_SECRETAS = ["STRIPE_SECRET_KEY"];
-const CHAVES_OPCIONAIS = ["NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"];
+const CHAVES_SECRETAS_VERIFICAR = ["STRIPE_SECRET_KEY", "DEEPSEEK_API_KEY"];
+const CHAVES_SECRETAS = CHAVES_SECRETAS_VERIFICAR;
+const CHAVES_OPCIONAIS = [
+  "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+  "DEEPSEEK_API_KEY",
+  "DEEPSEEK_MODEL",
+];
 
 function parseEnvLocal(content) {
   const vars = {};
@@ -115,7 +120,20 @@ async function main() {
   for (const key of CHAVES_OPCIONAIS) {
     const info = byKey[key];
     const hasProduction = info && info.targets && info.targets.includes("production");
-    console.log(`  ${hasProduction ? "✓" : "○"} ${key}: ${hasProduction ? "OK (production)" : "opcional"}`);
+    const isSecret = CHAVES_SECRETAS.includes(key);
+    const hasInLocal = !!vars[key];
+    const secretOk = isSecret && !hasProduction && hasInLocal;
+    if (hasProduction || secretOk) {
+      if (secretOk) {
+        console.log(
+          `  ✓ ${key}: OK (secreto, não listado pela API; presente no .env.local — rode 'npm run vercel:env' e faça Redeploy)`,
+        );
+      } else {
+        console.log(`  ✓ ${key}: OK (production)`);
+      }
+    } else {
+      console.log(`  ○ ${key}: opcional`);
+    }
   }
 
   console.log("");

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Envia variáveis do .env.local para a Vercel (Stripe e outras).
+ * Envia variáveis do .env.local para a Vercel (Stripe, site, WhatsApp, DeepSeek/atendente, etc.).
  * Uso:
  *   1. Crie um token em https://vercel.com/account/tokens
  *   2. No projeto na Vercel, anote o nome do projeto (Settings → General → Project Name)
@@ -66,17 +66,24 @@ async function main() {
     "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
     "NEXT_PUBLIC_SITE_URL",
     "NEXT_PUBLIC_WHATSAPP_NUMBER",
+    "DEEPSEEK_API_KEY",
+    "DEEPSEEK_MODEL",
   ].filter((k) => vars[k]);
 
   if (keysToSend.length === 0) {
-    console.error("Nenhuma das variáveis STRIPE/SITE/WHATSAPP encontrada em .env.local");
+    console.error(
+      "Nenhuma variável conhecida encontrada em .env.local (Stripe, site, WhatsApp, DEEPSEEK_API_KEY, etc.).",
+    );
     process.exit(1);
   }
 
   const body = keysToSend.map((key) => ({
     key,
     value: vars[key],
-    type: key.includes("SECRET") || key === "STRIPE_SECRET_KEY" ? "secret" : "plain",
+    type:
+      key.includes("SECRET") || key === "STRIPE_SECRET_KEY" || key === "DEEPSEEK_API_KEY"
+        ? "secret"
+        : "plain",
     target: ["production", "preview"],
   }));
 
