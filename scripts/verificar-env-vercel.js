@@ -132,7 +132,11 @@ async function main() {
         console.log(`  ✓ ${key}: OK (production)`);
       }
     } else {
-      console.log(`  ○ ${key}: opcional`);
+      const extra =
+        key === "DEEPSEEK_API_KEY"
+          ? " — sem isto o assistente (Shyr) responde 503 em /api/atendente"
+          : "";
+      console.log(`  ○ ${key}: opcional${extra}`);
     }
   }
 

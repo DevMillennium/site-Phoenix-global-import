@@ -1,13 +1,13 @@
 export const siteStrategy = {
-  fase: "Fase 1 - Fundacao",
-  objetivoPrincipal: "Aumentar a taxa de conversao da home para contato e navegacao em produtos.",
+  fase: "Fase 1 — Fundação",
+  objetivoPrincipal: "Aumentar a taxa de conversão da home para contato e navegação em produtos.",
   icpPrimario: {
     nome: "Comprador de tecnologia premium",
     perfil: "Pessoa física ou pequena empresa que busca eletrônicos originais com pronta entrega no Brasil.",
     dores: [
       "Medo de comprar produto falso ou sem garantia real.",
       "Prazo de entrega incerto em compras internacionais.",
-      "Falta de suporte humano rapido para duvidas antes da compra.",
+      "Falta de suporte humano rápido para dúvidas antes da compra.",
     ],
   },
   propostaDeValor:
@@ -20,21 +20,21 @@ export const siteStrategy = {
   diferenciais: [
     "Estoque local em Fortaleza para reduzir atrito de entrega.",
     "Curadoria de produtos premium e alta demanda real.",
-    "Atendimento consultivo para pedidos especiais e cotacoes.",
+    "Atendimento consultivo para pedidos especiais e cotações.",
   ],
 };
 
 export const socialProofItems = [
-  { label: "Anos de operacao", value: "5+" },
+  { label: "Anos de operação", value: "5+" },
   { label: "Clientes atendidos", value: "2.000+" },
   { label: "Estados atendidos", value: "27" },
 ];
 
 export const homeFaqItems = [
   {
-    question: "Os produtos sao originais?",
+    question: "Os produtos são originais?",
     answer:
-      "Sim. Trabalhamos com produtos originais e fornecedores validados. Nosso foco e confianca de ponta a ponta.",
+      "Sim. Trabalhamos com produtos originais e fornecedores validados. Nosso foco é confiança de ponta a ponta.",
   },
   {
     question: "Vocês entregam para todo o Brasil?",
@@ -42,8 +42,8 @@ export const homeFaqItems = [
       "Sim. Fazemos envios nacionais com acompanhamento e suporte durante o processo de entrega.",
   },
   {
-    question: "Posso pedir um produto que nao esta no catalogo?",
+    question: "Posso pedir um produto que não está no catálogo?",
     answer:
-      "Sim. Voce pode solicitar cotacao para itens especificos. Nossa equipe avalia disponibilidade e prazo.",
+      "Sim. Você pode solicitar cotação para itens específicos. Nossa equipe avalia disponibilidade e prazo.",
   },
 ];

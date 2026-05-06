@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
 export function HomeHero() {
   const [videoSrc, setVideoSrc] = useState("/hero-abertura.mp4");
+  const reduceMotion = useReducedMotion();
+  const prefersReducedMotion = reduceMotion === true;
 
   useEffect(() => {
     const selectVideoSource = () => {
@@ -20,27 +22,37 @@ export function HomeHero() {
 
   return (
     <section className="relative min-h-[50dvh] sm:min-h-[60dvh] md:min-h-[70vh] w-full overflow-hidden border-b border-phoenix-border bg-phoenix-dark">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-        style={{ filter: "saturate(1.06) contrast(1.04)" }}
-        aria-label="Vídeo de abertura Phoenix Global Import"
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
+      {prefersReducedMotion ? (
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-phoenix-surface via-phoenix-dark to-black"
+          aria-hidden
+        />
+      ) : (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/logo-phoenix-global.png"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          style={{ filter: "saturate(1.06) contrast(1.04)" }}
+          aria-label="Vídeo de abertura Phoenix Global Import"
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
+      )}
       <div
         className="absolute inset-0 bg-gradient-to-t from-phoenix-dark/80 via-phoenix-dark/35 to-transparent"
         aria-hidden
       />
       <div className="container relative z-10 flex min-h-[50dvh] sm:min-h-[60dvh] md:min-h-[70vh] flex-col justify-end pb-8 pt-6 sm:pb-12 sm:pt-8 md:pb-16 md:pt-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={
+            prefersReducedMotion ? { duration: 0 } : { duration: 0.6, delay: 0.2 }
+          }
           className="max-w-2xl"
         >
           <h1 className="font-display text-3xl font-bold tracking-tight text-phoenix-text xs:text-4xl md:text-5xl lg:text-6xl">

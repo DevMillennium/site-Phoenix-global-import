@@ -15,7 +15,9 @@
     "lint": "next lint",
     "vercel:env": "node scripts/enviar-env-vercel.js",
     "vercel:check": "node scripts/verificar-env-vercel.js",
-    "config:abrir": "node scripts/abrir-config-vercel-stripe.js"
+    "config:abrir": "node scripts/abrir-config-vercel-stripe.js",
+    "pleno": "node scripts/verificar-pleno.js",
+    "setup:env": "node scripts/copiar-env-example.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.9.0",

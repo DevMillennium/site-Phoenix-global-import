@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/Button";
 import type { Product } from "@/types/product";
@@ -11,6 +11,9 @@ interface HomeFeaturedProps {
 }
 
 export function HomeFeatured({ featured }: HomeFeaturedProps) {
+  const reduceMotion = useReducedMotion();
+  const prefersReduced = reduceMotion === true;
+
   return (
     <>
       <section className="container py-12 sm:py-16 md:py-24" aria-labelledby="destaques">
@@ -40,10 +43,10 @@ export function HomeFeatured({ featured }: HomeFeaturedProps) {
       <section className="border-t border-phoenix-border bg-phoenix-surface/50">
         <div className="container py-12 sm:py-16 md:py-20">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: prefersReduced ? 0 : 0.4 }}
             className="mx-auto max-w-2xl text-center"
           >
             <h2 className="font-display text-2xl font-bold text-phoenix-text md:text-3xl">

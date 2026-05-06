@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { trackEvent } from "@/lib/analytics";
+import { tryParseResponseJson } from "@/lib/parse-api-json";
 import { cn } from "@/lib/utils";
 
 interface BotaoPagarCartaoCarrinhoProps {
@@ -35,7 +36,15 @@ export function BotaoPagarCartaoCarrinho({ className }: BotaoPagarCartaoCarrinho
           items: items.map((i) => ({ slug: i.slug, quantity: i.quantity })),
         }),
       });
-      const data = (await res.json()) as { url?: string; error?: string };
+      const parsed = await tryParseResponseJson<{ url?: string; error?: string }>(res);
+      if (!parsed.parsed) {
+        throw new Error(
+          res.status >= 500
+            ? "Servidor indisponível no momento. Tente de novo em instantes."
+            : "Resposta inválida do servidor. Tente de novo.",
+        );
+      }
+      const data = parsed.data;
       if (!res.ok) throw new Error(data.error ?? "Erro ao iniciar pagamento");
       if (data.url) window.location.href = data.url;
     } catch (e) {

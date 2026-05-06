@@ -9,6 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   children: React.ReactNode;
   className?: string;
+  /** Obrigatório para links cujo `children` não é texto visível (ex.: só ícones). */
+  ariaLabel?: string;
   trackingEvent?: string;
   trackingPayload?: Record<string, unknown>;
 }
@@ -35,6 +37,7 @@ export function Button({
   href,
   children,
   className,
+  ariaLabel,
   trackingEvent,
   trackingPayload,
   ...props
@@ -46,15 +49,11 @@ export function Button({
 
   if (href) {
     const trackPayload = trackingPayload ? JSON.stringify(trackingPayload) : undefined;
-    const linkAria =
-      typeof children === "string"
-        ? undefined
-        : ({ "aria-label": "Ação" } as const);
     return (
       <Link
         href={href}
         className={combined}
-        {...linkAria}
+        {...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {})}
         data-track-event={trackingEvent}
         data-track-payload={trackPayload}
       >
@@ -70,6 +69,7 @@ export function Button({
       data-track-event={trackingEvent}
       data-track-payload={trackingPayload ? JSON.stringify(trackingPayload) : undefined}
       {...props}
+      {...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {})}
     >
       {children}
     </button>

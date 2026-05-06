@@ -4,6 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { getWhatsAppLink } from "@/lib/env";
+import { tryParseResponseJson } from "@/lib/parse-api-json";
 
 type ChatTurn = { role: "user" | "assistant"; content: string };
 
@@ -47,7 +48,16 @@ export function AtendenteFlutuante() {
           messages: historico.map((m) => ({ role: m.role, content: m.content })),
         }),
       });
-      const data = (await res.json()) as { message?: string; error?: string };
+      const parsed = await tryParseResponseJson<{ message?: string; error?: string }>(res);
+      if (!parsed.parsed) {
+        setErro(
+          res.status >= 500
+            ? "Servidor indisponível. Tente de novo em instantes."
+            : "Resposta inválida. Tente de novo.",
+        );
+        return;
+      }
+      const data = parsed.data;
 
       if (!res.ok) {
         setErro(data.error ?? "Não foi possível enviar. Tente de novo.");

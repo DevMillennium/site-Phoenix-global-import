@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { tryParseResponseJson } from "@/lib/parse-api-json";
 import { cn } from "@/lib/utils";
 
 interface BotaoPagarCartaoProps {
@@ -35,7 +36,15 @@ export function BotaoPagarCartao({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, quantity }),
       });
-      const data = await res.json();
+      const parsed = await tryParseResponseJson<{ url?: string; error?: string }>(res);
+      if (!parsed.parsed) {
+        throw new Error(
+          res.status >= 500
+            ? "Servidor indisponível no momento. Tente de novo em instantes."
+            : "Resposta inválida do servidor. Tente de novo.",
+        );
+      }
+      const data = parsed.data;
       if (!res.ok) throw new Error(data.error ?? "Erro ao iniciar pagamento");
       if (data.url) window.location.href = data.url;
     } catch (e) {
