@@ -45,6 +45,15 @@ export function buildFernandaWhatsAppMessage(
   return `Olá, Fernanda. Tenho interesse no produto ${product.name}. Ainda está disponível? Qual o valor no Pix e como funciona a retirada/entrega?`;
 }
 
+/** Mensagem sugerida para Instagram Direct (usuário cola ou adapta no DM). */
+export function buildInstagramDirectMessage(
+  product: Product,
+  intent: ProductCtaIntent = "product_interest"
+): string {
+  const base = buildFernandaWhatsAppMessage(product, intent);
+  return base.replace(/Olá, Fernanda\.?/i, "Olá!").replace(/Olá, Fernanda!/i, "Olá!");
+}
+
 export function getProductWhatsAppLink(
   product: Product,
   intent: ProductCtaIntent = "product_interest"

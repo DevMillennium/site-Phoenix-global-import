@@ -5,6 +5,7 @@ import { HomeFeatured } from "@/components/home/HomeFeatured";
 import { HomeConversionSections } from "@/components/home/HomeConversionSections";
 import { getFeaturedProducts } from "@/data/products";
 import { getBaseUrl } from "@/lib/env";
+import { getSocialSameAs } from "@/lib/social";
 import { siteStrategy } from "@/lib/site-strategy";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function HomePage() {
     description: siteStrategy.propostaDeValor,
     areaServed: "BR",
     slogan: "Eletrônicos importados com pronta entrega e suporte consultivo.",
+    sameAs: getSocialSameAs(),
   };
 
   const websiteJsonLd = {

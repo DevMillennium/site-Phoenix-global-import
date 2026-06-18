@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/Button";
+import { LinkInstagram } from "@/components/checkout/LinkInstagram";
 import { getWhatsAppLink } from "@/lib/env";
+import { getInstagramUrl, getInstagramHandle } from "@/lib/social";
 
 export const metadata = {
   title: "Contato",
@@ -11,6 +13,8 @@ const linkCotacao = getWhatsAppLink("Olá! Gostaria de solicitar cotação para 
 const linkAtendimento = getWhatsAppLink(
   "Olá! Gostaria de mais informações sobre os produtos da Phoenix Global Import."
 );
+const instagramUrl = getInstagramUrl();
+const instagramHandle = getInstagramHandle();
 
 export default function ContatoPage() {
   return (
@@ -42,6 +46,32 @@ export default function ContatoPage() {
             >
               <Button size="lg">Abrir WhatsApp para cotação</Button>
             </a>
+          </div>
+
+          <div className="rounded-xl border border-phoenix-border bg-phoenix-card p-6">
+            <h2 className="font-display text-xl font-semibold text-phoenix-text">
+              Instagram
+            </h2>
+            <p className="mt-2 text-phoenix-text-muted">
+              Acompanhe lançamentos, reels e novidades em{" "}
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-phoenix-primary hover:underline"
+              >
+                @{instagramHandle}
+              </a>
+              . Envie Direct para dúvidas sobre produtos.
+            </p>
+            <LinkInstagram
+              className="mt-4 inline-flex items-center justify-center min-h-touch gap-2 rounded-lg border border-phoenix-primary px-6 py-3 text-base font-medium text-phoenix-primary hover:bg-phoenix-primary/10 transition-colors"
+              trackingSource="contato_page"
+              trackingAction="abrir_instagram_direct"
+              leadContext={{ intent: "general", message: "Contato via página do site" }}
+            >
+              Chamar no Instagram
+            </LinkInstagram>
           </div>
 
           <div className="rounded-xl border border-phoenix-border bg-phoenix-card p-6">

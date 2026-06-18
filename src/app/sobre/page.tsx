@@ -20,8 +20,8 @@ export default function SobrePage() {
         <div className="mt-10 space-y-6 text-phoenix-text-muted">
           <p>
             A Phoenix Global Import atua na importação e venda de eletrônicos e
-            tecnologia. Nosso estoque fica em Fortaleza, Ceará, e enviamos para
-            todo o Brasil.
+            tecnologia, com operações Brasil ↔ Paraguai e estoque em Fortaleza,
+            Ceará. Enviamos para todo o Brasil.
           </p>
           <p>
             Trabalhamos com marcas consolidadas e produtos originais, além de

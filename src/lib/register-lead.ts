@@ -12,6 +12,7 @@ export type RegisterLeadContext = {
   message?: string;
   customerName?: string;
   customerPhone?: string;
+  channelPreference?: "whatsapp" | "instagram" | "site";
 };
 
 /** Fire-and-forget — não bloqueia abertura do WhatsApp. */
