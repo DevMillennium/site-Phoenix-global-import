@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
 import { TrustStrip } from "@/components/home/TrustStrip";
+import { HomeInstagramReels } from "@/components/home/HomeInstagramReels";
 import { HomeFeatured } from "@/components/home/HomeFeatured";
 import { HomeConversionSections } from "@/components/home/HomeConversionSections";
 import { getFeaturedProducts } from "@/data/products";
@@ -55,6 +56,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       <HomeHero />
       <TrustStrip />
+      <HomeInstagramReels />
       <HomeFeatured featured={featured} />
       <HomeConversionSections />
     </>

@@ -68,7 +68,10 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               {product.pricePix ? (
                 <>
                   {formatPrice(product.pricePix)}{" "}
-                  <span className="text-xs font-normal text-phoenix-text-muted">no PIX</span>
+                  <span className="text-xs font-normal text-emerald-400/90">no PIX</span>
+                  <span className="ml-1.5 text-sm font-normal text-phoenix-muted line-through">
+                    {formatPrice(product.price)}
+                  </span>
                 </>
               ) : (
                 formatPrice(product.price)

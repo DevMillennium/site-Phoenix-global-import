@@ -11,6 +11,7 @@ import { LinkInstagram } from "@/components/checkout/LinkInstagram";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductFaq } from "@/components/product/ProductFaq";
+import { ProductReelStrip } from "@/components/product/ProductReelStrip";
 import { getDefaultProductFaq } from "@/lib/product-queries";
 import {
   buildFernandaWhatsAppMessage,
@@ -213,6 +214,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
           )}
 
           <ProductFaq items={faqItems} />
+          <ProductReelStrip product={product} />
         </div>
       </article>
 
