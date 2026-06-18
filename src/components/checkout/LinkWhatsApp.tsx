@@ -2,6 +2,7 @@
 
 import { getWhatsAppLink } from "@/lib/env";
 import { trackEvent } from "@/lib/analytics";
+import { registerSiteLead, type RegisterLeadContext } from "@/lib/register-lead";
 
 interface LinkWhatsAppProps {
   href: string;
@@ -10,6 +11,8 @@ interface LinkWhatsAppProps {
   ariaLabel?: string;
   trackingSource?: string;
   trackingAction?: string;
+  /** Registra lead no PAIOS antes de abrir WhatsApp (fire-and-forget). */
+  leadContext?: RegisterLeadContext;
 }
 
 const FALLBACK_MESSAGE = "Olá! Gostaria de mais informações.";
@@ -22,6 +25,7 @@ export function LinkWhatsApp({
   ariaLabel,
   trackingSource = "unknown",
   trackingAction = "open_whatsapp",
+  leadContext,
 }: LinkWhatsAppProps) {
   const openWhatsApp = (e: React.MouseEvent) => {
     const link = href && href.startsWith("https://wa.me/") ? href : getWhatsAppLink(FALLBACK_MESSAGE);
@@ -30,6 +34,9 @@ export function LinkWhatsApp({
       source: trackingSource,
       action: trackingAction,
     });
+    if (leadContext) {
+      registerSiteLead(leadContext);
+    }
     e.preventDefault();
     const w = typeof window !== "undefined" ? window.top ?? window : null;
     if (w) w.open(link, "_blank", "noopener,noreferrer");
