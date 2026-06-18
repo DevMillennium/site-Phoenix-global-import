@@ -87,7 +87,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
                 <span className="text-3xl font-bold text-phoenix-primary">
                   {product.pricePix ? formatPrice(product.pricePix) : formatPrice(product.price)}
                 </span>
-                {product.pricePix && (
+                {product.pricePix != null && product.pricePix < product.price && (
                   <span className="text-sm text-phoenix-text-muted">
                     no PIX · ou {formatPrice(product.price)} no cartão
                   </span>

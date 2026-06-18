@@ -100,7 +100,8 @@ export function HomeInstagramReels() {
           {instagramReels.map((reel, i) => {
             const product = getProductBySlug(reel.productSlug);
             const displayPrice = product?.pricePix ?? product?.price;
-            const hasPromo = product?.pricePix != null && product.pricePix < product.price;
+            const hasPromo =
+              product?.pricePix != null && product.price != null && product.pricePix < product.price;
 
             return (
               <li key={reel.id} className="snap-start shrink-0 w-[168px] sm:w-[188px]">
