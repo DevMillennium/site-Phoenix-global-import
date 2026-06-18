@@ -10,6 +10,7 @@ import { LinkWhatsApp } from "@/components/checkout/LinkWhatsApp";
 import { LinkInstagram } from "@/components/checkout/LinkInstagram";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductVideo } from "@/components/product/ProductVideo";
 import { ProductFaq } from "@/components/product/ProductFaq";
 import { ProductReelStrip } from "@/components/product/ProductReelStrip";
 import { getDefaultProductFaq } from "@/lib/product-queries";
@@ -55,6 +56,13 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
           priority
           outOfStock={isOutOfStock}
         />
+        {product.productVideo && (
+          <ProductVideo
+            src={product.productVideo}
+            poster={product.images[0]}
+            title={product.name}
+          />
+        )}
 
         <div>
           <div className="flex flex-wrap gap-2 mb-3">

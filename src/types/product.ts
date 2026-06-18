@@ -20,6 +20,8 @@ export interface Product {
   condition: ProductCondition;
   badges: ProductBadge[];
   images: string[];
+  /** Vídeo MP4 hospedado no site (ex.: /videos/slug.mp4). */
+  productVideo?: string;
   videoUrl?: string;
   specs?: Record<string, string>;
   /** Perguntas específicas do produto (opcional); caso vazio, usa FAQ padrão na PDP. */
